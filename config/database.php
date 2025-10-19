@@ -1,9 +1,15 @@
 <?php
-// Database configuration
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', 'Luc3105dev#');
-define('DB_NAME', 'classicmodels');
+// Load environment variables
+require_once __DIR__ . '/env.php';
+
+// Load .env file
+EnvLoader::load(__DIR__ . '/../.env');
+
+// Database configuration from environment variables
+define('DB_HOST', EnvLoader::get('DB_HOST', 'localhost'));
+define('DB_USER', EnvLoader::get('DB_USER', 'root'));
+define('DB_PASS', EnvLoader::get('DB_PASS', ''));
+define('DB_NAME', EnvLoader::get('DB_NAME', 'classicmodels'));
 
 // Create connection
 function getDBConnection() {

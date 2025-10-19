@@ -117,7 +117,7 @@ $banners = $conn->query("SELECT * FROM banners ORDER BY bannerID DESC");
                             <img src="<?php echo htmlspecialchars($banner['image_url']); ?>" class="card-img-top" alt="Banner" style="height: 200px; object-fit: cover;">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo htmlspecialchars($banner['title']); ?></h5>
-                                <p class="card-text"><?php echo htmlspecialchars($banner['description']); ?></p>
+                                <!-- <p class="card-text"><?php echo htmlspecialchars($banner['description']); ?></p> -->
                                 <p class="card-text">
                                     <small class="text-muted">
                                         <i class="fas fa-link"></i> <?php echo htmlspecialchars($banner['link_url'] ?: 'Không có link'); ?>

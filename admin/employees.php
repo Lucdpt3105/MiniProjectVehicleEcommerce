@@ -138,7 +138,7 @@ $pageTitle = 'Quản lý nhân viên';
                                         <tr>
                                             <td>#<?php echo $employee['userID']; ?></td>
                                             <td><?php echo htmlspecialchars($employee['username']); ?></td>
-                                            <td><?php echo htmlspecialchars($employee['full_name']); ?></td>
+                                            <td><?php echo htmlspecialchars($employee['full_name'] ?? 'N/A'); ?></td>
                                             <td><?php echo htmlspecialchars($employee['email']); ?></td>
                                             <td>
                                                 <span class="badge bg-primary"><?php echo $employee['assigned_customers']; ?></span>

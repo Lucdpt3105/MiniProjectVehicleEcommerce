@@ -4,7 +4,27 @@ Hệ thống thương mại điện tử đầy đủ được xây dựng bằn
 
 ---
 
-## 📋 Mục lục
+## � LƯU Ý BẢO MẬT QUAN TRỌNG
+
+⚠️ **Dự án này sử dụng file `.env` để lưu trữ thông tin nhạy cảm!**
+
+1. **Tạo file `.env`** từ template:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. **Cập nhật mật khẩu** trong file `.env`:
+   ```env
+   DB_PASS=your_password_here
+   ```
+
+3. **KHÔNG BAO GIỜ commit file `.env`** lên Git!
+
+📖 Đọc thêm: [SECURITY_GUIDE.md](SECURITY_GUIDE.md)
+
+---
+
+## �📋 Mục lục
 - [Tính năng](#-tính-năng)
 - [Công nghệ sử dụng](#-công-nghệ-sử-dụng)
 - [Cài đặt](#-cài-đặt)
@@ -98,13 +118,22 @@ Hệ thống thương mại điện tử đầy đủ được xây dựng bằn
 
 3. **Cấu hình kết nối database**
    
-   Mở file `config/database.php` và kiểm tra thông tin:
-   ```php
-   define('DB_HOST', 'localhost');
-   define('DB_USER', 'root');
-   define('DB_PASS', 'Luc3105dev#');  // Thay bằng password của bạn
-   define('DB_NAME', 'classicmodels');
+3. **Cấu hình Database**
+
+   a. Copy file `.env.example` thành `.env`:
+   ```bash
+   cp .env.example .env
    ```
+   
+   b. Mở file `.env` và cập nhật thông tin database của bạn:
+   ```env
+   DB_HOST=localhost
+   DB_USER=root
+   DB_PASS=your_password_here
+   DB_NAME=classicmodels
+   ```
+   
+   ⚠️ **LƯU Ý**: File `.env` chứa thông tin nhạy cảm và **KHÔNG được commit lên Git**!
 
 4. **Truy cập website**
    ```

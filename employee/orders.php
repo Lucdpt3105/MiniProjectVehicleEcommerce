@@ -17,7 +17,7 @@ $employeeID = 1165; // Use a real employee ID from employees table
 $employee = $conn->query("SELECT * FROM employees WHERE employeeNumber = $employeeID")->fetch_assoc();
 
 // Get orders assigned to this employee
-$orders = $conn->query("SELECT o.*, c.customerName, c.phone, c.contactEmail,
+$orders = $conn->query("SELECT o.*, c.customerName, c.phone,
                        (SELECT SUM(quantityOrdered * priceEach) FROM orderdetails WHERE orderNumber = o.orderNumber) as total
                        FROM orders o
                        JOIN customers c ON o.customerNumber = c.customerNumber

@@ -10,28 +10,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action'])) {
         switch ($_POST['action']) {
             case 'add':
-                $stmt = $conn->prepare("INSERT INTO promotions (title, description, discount_percentage, start_date, end_date, is_active) VALUES (?, ?, ?, ?, ?, ?)");
+                $stmt = $conn->prepare("INSERT INTO promotions (promo_name, description, discount_percent, start_date, end_date, is_active) VALUES (?, ?, ?, ?, ?, ?)");
                 $stmt->bind_param("ssdssi", $_POST['title'], $_POST['description'], $_POST['discount_percentage'], $_POST['start_date'], $_POST['end_date'], $_POST['is_active']);
                 $stmt->execute();
                 $message = 'Thêm khuyến mãi thành công!';
                 break;
                 
             case 'update':
-                $stmt = $conn->prepare("UPDATE promotions SET title = ?, description = ?, discount_percentage = ?, start_date = ?, end_date = ?, is_active = ? WHERE id = ?");
+                $stmt = $conn->prepare("UPDATE promotions SET promo_name = ?, description = ?, discount_percent = ?, start_date = ?, end_date = ?, is_active = ? WHERE promoID = ?");
                 $stmt->bind_param("ssdssii", $_POST['title'], $_POST['description'], $_POST['discount_percentage'], $_POST['start_date'], $_POST['end_date'], $_POST['is_active'], $_POST['id']);
                 $stmt->execute();
                 $message = 'Cập nhật khuyến mãi thành công!';
                 break;
                 
             case 'delete':
-                $stmt = $conn->prepare("DELETE FROM promotions WHERE id = ?");
+                $stmt = $conn->prepare("DELETE FROM promotions WHERE promoID = ?");
                 $stmt->bind_param("i", $_POST['id']);
                 $stmt->execute();
                 $message = 'Xóa khuyến mãi thành công!';
                 break;
                 
             case 'toggle':
-                $stmt = $conn->prepare("UPDATE promotions SET is_active = NOT is_active WHERE id = ?");
+                $stmt = $conn->prepare("UPDATE promotions SET is_active = NOT is_active WHERE promoID = ?");
                 $stmt->bind_param("i", $_POST['id']);
                 $stmt->execute();
                 $message = 'Cập nhật trạng thái thành công!';
@@ -93,12 +93,12 @@ $promotions = $conn->query("SELECT * FROM promotions ORDER BY start_date DESC");
                                     $isActive = $promo['is_active'] && $promo['start_date'] <= $now && $promo['end_date'] >= $now;
                                 ?>
                                     <tr>
-                                        <td><?php echo $promo['id']; ?></td>
-                                        <td><strong><?php echo htmlspecialchars($promo['title']); ?></strong></td>
-                                        <td><?php echo htmlspecialchars($promo['description']); ?></td>
+                                        <td><?php echo $promo['promoID']; ?></td>
+                                        <td><strong><?php echo htmlspecialchars($promo['promo_name']); ?></strong></td>
+                                        <td><?php echo htmlspecialchars($promo['description'] ?? ''); ?></td>
                                         <td>
                                             <span class="badge bg-danger">
-                                                <?php echo $promo['discount_percentage']; ?>% OFF
+                                                <?php echo $promo['discount_percent']; ?>% OFF
                                             </span>
                                         </td>
                                         <td><?php echo date('d/m/Y', strtotime($promo['start_date'])); ?></td>
@@ -121,7 +121,7 @@ $promotions = $conn->query("SELECT * FROM promotions ORDER BY start_date DESC");
                                         <td>
                                             <form method="POST" class="d-inline">
                                                 <input type="hidden" name="action" value="toggle">
-                                                <input type="hidden" name="id" value="<?php echo $promo['id']; ?>">
+                                                <input type="hidden" name="id" value="<?php echo $promo['promoID']; ?>">
                                                 <button type="submit" class="btn btn-sm btn-info">
                                                     <i class="fas fa-<?php echo $promo['is_active'] ? 'toggle-on' : 'toggle-off'; ?>"></i>
                                                 </button>
@@ -131,7 +131,7 @@ $promotions = $conn->query("SELECT * FROM promotions ORDER BY start_date DESC");
                                             </button>
                                             <form method="POST" class="d-inline" onsubmit="return confirm('Xác nhận xóa?');">
                                                 <input type="hidden" name="action" value="delete">
-                                                <input type="hidden" name="id" value="<?php echo $promo['id']; ?>">
+                                                <input type="hidden" name="id" value="<?php echo $promo['promoID']; ?>">
                                                 <button type="submit" class="btn btn-sm btn-danger">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
@@ -255,10 +255,10 @@ $promotions = $conn->query("SELECT * FROM promotions ORDER BY start_date DESC");
         document.querySelectorAll('.edit-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 const promo = JSON.parse(this.dataset.promo);
-                document.getElementById('edit_id').value = promo.id;
-                document.getElementById('edit_title').value = promo.title;
+                document.getElementById('edit_id').value = promo.promoID;
+                document.getElementById('edit_title').value = promo.promo_name;
                 document.getElementById('edit_description').value = promo.description || '';
-                document.getElementById('edit_discount_percentage').value = promo.discount_percentage;
+                document.getElementById('edit_discount_percentage').value = promo.discount_percent;
                 document.getElementById('edit_start_date').value = promo.start_date;
                 document.getElementById('edit_end_date').value = promo.end_date;
                 document.getElementById('edit_is_active').checked = promo.is_active == 1;

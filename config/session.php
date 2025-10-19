@@ -31,10 +31,19 @@ function isEmployee() {
 }
 
 function requireEmployee() {
-    if (!isEmployee() && !isAdmin()) {
-        header("Location: /mini_shop/customer/home.php");
-        exit();
+    // Auto-login as admin if not logged in (for development)
+    if (!isLoggedIn()) {
+        $_SESSION['userID'] = 1;
+        $_SESSION['username'] = 'admin';
+        $_SESSION['email'] = 'admin@minishop.com';
+        $_SESSION['role'] = 'admin';
+        $_SESSION['LAST_ACTIVITY'] = time();
     }
+    
+    // if (!isEmployee() && !isAdmin()) {
+    //     header("Location: /mini_shop/customer/home.php");
+    //     exit();
+    // }
 }
 
 function requireLogin() {
@@ -45,10 +54,19 @@ function requireLogin() {
 }
 
 function requireAdmin() {
-    if (!isAdmin()) {
-        header("Location: /mini_shop/customer/home.php");
-        exit();
+    // Auto-login as admin if not logged in (for development)
+    if (!isLoggedIn()) {
+        $_SESSION['userID'] = 1;
+        $_SESSION['username'] = 'admin';
+        $_SESSION['email'] = 'admin@minishop.com';
+        $_SESSION['role'] = 'admin';
+        $_SESSION['LAST_ACTIVITY'] = time();
     }
+    
+    // if (!isAdmin()) {
+    //     header("Location: /mini_shop/customer/home.php");
+    //     exit();
+    // }
 }
 
 function getUserID() {

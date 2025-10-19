@@ -1,0 +1,76 @@
+# =============================================
+# Mini Shop - Git Ignore File
+# =============================================
+
+# Environment Variables (SENSITIVE!)
+.env
+.env.local
+.env.*.local
+
+# Database Configuration (if any backup)
+*.sql.backup
+db_backup/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+logs/
+error_log
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# PHP
+vendor/
+composer.lock
+composer.phar
+
+# Node modules (if using npm)
+node_modules/
+package-lock.json
+
+# OS Files
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Upload directories (may contain user data)
+uploads/
+user_uploads/
+
+# Cache
+cache/
+*.cache
+
+# Session files
+sessions/
+*.session
+
+# Generated files
+generated/
+dist/
+build/
+
+# Personal notes
+NOTES.md
+TODO.md
+PRIVATE.md
+
+# =============================================
+# IMPORTANT: Keep .env.example in repository!
+# This is a template file for other developers
+# =============================================
