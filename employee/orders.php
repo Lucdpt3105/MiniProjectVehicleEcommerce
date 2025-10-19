@@ -17,7 +17,7 @@ $employeeID = 1165; // Use a real employee ID from employees table
 $employee = $conn->query("SELECT * FROM employees WHERE employeeNumber = $employeeID")->fetch_assoc();
 
 // Get orders assigned to this employee
-$orders = $conn->query("SELECT o.*, c.customerName, c.phone, c.email,
+$orders = $conn->query("SELECT o.*, c.customerName, c.phone, c.contactEmail,
                        (SELECT SUM(quantityOrdered * priceEach) FROM orderdetails WHERE orderNumber = o.orderNumber) as total
                        FROM orders o
                        JOIN customers c ON o.customerNumber = c.customerNumber
@@ -120,23 +120,29 @@ $pageTitle = 'Đơn hàng của tôi';
                                             <td><?php echo htmlspecialchars($order['customerName']); ?></td>
                                             <td>
                                                 <small>
-                                                    <i class="fas fa-phone"></i> <?php echo htmlspecialchars($order['phone']); ?><br>
-                                                    <i class="fas fa-envelope"></i> <?php echo htmlspecialchars($order['email']); ?>
+                                                    <?php if (!empty($order['phone'])): ?>
+                                                        <i class="fas fa-phone"></i> <?php echo htmlspecialchars($order['phone']); ?><br>
+                                                    <?php endif; ?>
+                                                    <?php if (!empty($order['contactEmail'])): ?>
+                                                        <i class="fas fa-envelope"></i> <?php echo htmlspecialchars($order['contactEmail']); ?>
+                                                    <?php endif; ?>
                                                 </small>
                                             </td>
                                             <td><?php echo date('d/m/Y', strtotime($order['orderDate'])); ?></td>
-                                            <td><?php echo number_format($order['total'], 0); ?> USD</td>
+                                            <td><?php echo number_format($order['total'] ?? 0, 0); ?> USD</td>
                                             <td>
                                                 <span class="badge <?php 
                                                     echo match($order['status']) {
-                                                        'Processing' => 'bg-warning',
+                                                        'In Process' => 'bg-warning',
                                                         'Shipped' => 'bg-info',
-                                                        'Delivered' => 'bg-success',
+                                                        'Resolved' => 'bg-success',
                                                         'Cancelled' => 'bg-danger',
+                                                        'On Hold' => 'bg-secondary',
+                                                        'Disputed' => 'bg-dark',
                                                         default => 'bg-secondary'
                                                     };
                                                 ?>">
-                                                    <?php echo $order['status']; ?>
+                                                    <?php echo htmlspecialchars($order['status'] ?? 'N/A'); ?>
                                                 </span>
                                             </td>
                                             <td>
@@ -174,10 +180,13 @@ $pageTitle = 'Đơn hàng của tôi';
                         <div class="mb-3">
                             <label class="form-label">Trạng thái mới</label>
                             <select class="form-select" name="status" required>
-                                <option value="Processing">Processing</option>
-                                <option value="Shipped">Shipped</option>
-                                <option value="Delivered">Delivered</option>
-                                <option value="Cancelled">Cancelled</option>
+                                <option value="">-- Chọn trạng thái --</option>
+                                <option value="In Process">In Process (Đang xử lý)</option>
+                                <option value="Shipped">Shipped (Đã giao vận)</option>
+                                <option value="Resolved">Resolved (Hoàn thành)</option>
+                                <option value="On Hold">On Hold (Tạm giữ)</option>
+                                <option value="Cancelled">Cancelled (Đã hủy)</option>
+                                <option value="Disputed">Disputed (Tranh chấp)</option>
                             </select>
                         </div>
                         <div class="mb-3">

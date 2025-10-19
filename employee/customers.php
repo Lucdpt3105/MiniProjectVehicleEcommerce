@@ -121,24 +121,42 @@ $pageTitle = 'Khách hàng của tôi';
                                         <tr>
                                             <td>#<?php echo $customer['customerNumber']; ?></td>
                                             <td>
-                                                <strong><?php echo htmlspecialchars($customer['customerName']); ?></strong>
+                                                <strong><?php echo htmlspecialchars($customer['customerName'] ?? 'N/A'); ?></strong>
                                                 <br>
-                                                <small class="text-muted"><?php echo htmlspecialchars($customer['contactFirstName'] . ' ' . $customer['contactLastName']); ?></small>
-                                            </td>
-                                            <td>
-                                                <small>
-                                                    <i class="fas fa-phone"></i> <?php echo htmlspecialchars($customer['phone']); ?><br>
-                                                    <i class="fas fa-envelope"></i> <?php echo htmlspecialchars($customer['email']); ?>
+                                                <small class="text-muted">
+                                                    <?php 
+                                                    $fullName = trim(($customer['contactFirstName'] ?? '') . ' ' . ($customer['contactLastName'] ?? ''));
+                                                    echo htmlspecialchars($fullName ?: 'N/A'); 
+                                                    ?>
                                                 </small>
                                             </td>
                                             <td>
                                                 <small>
-                                                    <?php echo htmlspecialchars($customer['addressLine1']); ?><br>
-                                                    <?php echo htmlspecialchars($customer['city'] . ', ' . $customer['country']); ?>
+                                                    <?php if (!empty($customer['phone'])): ?>
+                                                        <i class="fas fa-phone"></i> <?php echo htmlspecialchars($customer['phone']); ?><br>
+                                                    <?php endif; ?>
+                                                    <?php if (!empty($customer['contactEmail'])): ?>
+                                                        <i class="fas fa-envelope"></i> <?php echo htmlspecialchars($customer['contactEmail']); ?>
+                                                    <?php endif; ?>
                                                 </small>
                                             </td>
                                             <td>
-                                                <span class="badge bg-primary"><?php echo $customer['totalOrders']; ?></span>
+                                                <small>
+                                                    <?php 
+                                                    $address = htmlspecialchars($customer['addressLine1'] ?? '');
+                                                    if (!empty($customer['addressLine2'])) {
+                                                        $address .= '<br>' . htmlspecialchars($customer['addressLine2']);
+                                                    }
+                                                    echo $address ?: 'N/A';
+                                                    ?><br>
+                                                    <?php 
+                                                    $location = trim(($customer['city'] ?? '') . ', ' . ($customer['country'] ?? ''));
+                                                    echo htmlspecialchars($location !== ', ' ? $location : 'N/A'); 
+                                                    ?>
+                                                </small>
+                                            </td>
+                                            <td>
+                                                <span class="badge bg-primary"><?php echo $customer['totalOrders'] ?? 0; ?></span>
                                             </td>
                                             <td><?php echo number_format($customer['totalPayments'] ?? 0, 0); ?> USD</td>
                                             <td>
