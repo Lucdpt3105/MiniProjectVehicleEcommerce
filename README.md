@@ -1,10 +1,4 @@
 # 🛒 Mini Shop - E-commerce System
-
-Hệ thống thương mại điện tử đầy đủ được xây dựng bằng **PHP thuần** và **MySQL**.
-
----
-
-
 ## �📋 Mục lục
 - [Tính năng](#-tính-năng)
 - [Công nghệ sử dụng](#-công-nghệ-sử-dụng)
@@ -50,9 +44,7 @@ Hệ thống thương mại điện tử đầy đủ được xây dựng bằn
   - Biểu đồ doanh thu & dòng sản phẩm (Chart.js)
 
 ---
-
 ## 🛠 Công nghệ sử dụng
-
 - **Backend**: PHP 8.x (Vanilla PHP - không framework)
 - **Database**: MySQL 8.x
 - **Frontend**: 
@@ -66,9 +58,7 @@ Hệ thống thương mại điện tử đầy đủ được xây dựng bằn
   - Prepared statements (SQL injection prevention)
   - Session management
   - CSRF protection
-
 ---
-
 ## 📦 Cài đặt
 
 ### Yêu cầu hệ thống
@@ -113,14 +103,10 @@ Hệ thống thương mại điện tử đầy đủ được xây dựng bằn
    DB_PASS=your_password_here
    DB_NAME=classicmodels
    ```
-   
-   ⚠️ **LƯU Ý**: File `.env` chứa thông tin nhạy cảm và **KHÔNG được commit lên Git**!
-
 4. **Truy cập website**
    ```
    http://localhost/mini_shop/
    ```
-
 ---
 
 ## 📁 Cấu trúc dự án
@@ -175,7 +161,6 @@ mini_shop/
 ├── delete.php              # (Legacy) Xóa sản phẩm
 └── db.php                  # (Legacy) Database connection
 ```
-
 ---
 
 ## 🚀 Hướng dẫn sử dụng
@@ -210,26 +195,6 @@ mini_shop/
    - Vào chi tiết sản phẩm
    - Tab "Đánh giá"
    - Chọn số sao & viết nhận xét
-
----
-
-## 🔑 Tài khoản mặc định
-
-### Admin
-```
-Username: admin
-Password: admin123
-Role: admin
-```
-
-### Customer
-```
-Username: customer1
-Password: customer123
-Role: customer
-```
-
-> **Lưu ý**: Đổi password ngay sau khi đăng nhập lần đầu!
 
 ---
 
@@ -297,26 +262,6 @@ rating, comment, created_at
 - ✅ Input validation & sanitization
 - ✅ Role-based access control
 - ✅ HTTPS ready
-
----
-
-## 🐛 Troubleshooting
-
-### Lỗi kết nối database
-```
-Solution: Kiểm tra config/database.php và đảm bảo MySQL đang chạy
-```
-
-### Không thêm được vào giỏ hàng
-```
-Solution: Kiểm tra session đã được start chưa (session_start())
-```
-
-### Hình ảnh sản phẩm không hiển thị
-```
-Solution: Thêm dữ liệu vào bảng product_images
-```
-
 ---
 
 ## 📝 TODO
@@ -343,18 +288,9 @@ Solution: Thêm dữ liệu vào bảng product_images
 
 ---
 
-## 📄 License
-
-MIT License - Free to use
-
----
-
 ## 📞 Liên hệ
 
 - **Email**: support@minishop.com
-- **GitHub**: [Your GitHub]
 - **Website**: http://localhost/mini_shop/
-
 ---
-
 **Developed with ❤️ using PHP & MySQL**
