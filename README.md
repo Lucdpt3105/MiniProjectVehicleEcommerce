@@ -4,25 +4,6 @@ Hệ thống thương mại điện tử đầy đủ được xây dựng bằn
 
 ---
 
-## � LƯU Ý BẢO MẬT QUAN TRỌNG
-
-⚠️ **Dự án này sử dụng file `.env` để lưu trữ thông tin nhạy cảm!**
-
-1. **Tạo file `.env`** từ template:
-   ```bash
-   cp .env.example .env
-   ```
-
-2. **Cập nhật mật khẩu** trong file `.env`:
-   ```env
-   DB_PASS=your_password_here
-   ```
-
-3. **KHÔNG BAO GIỜ commit file `.env`** lên Git!
-
-📖 Đọc thêm: [SECURITY_GUIDE.md](SECURITY_GUIDE.md)
-
----
 
 ## �📋 Mục lục
 - [Tính năng](#-tính-năng)
