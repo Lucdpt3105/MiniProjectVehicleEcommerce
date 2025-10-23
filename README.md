@@ -1,5 +1,5 @@
 # 🛒 Mini Shop - E-commerce System
-## �📋 Mục lục
+##📋 Mục lục
 - [Tính năng](#-tính-năng)
 - [Công nghệ sử dụng](#-công-nghệ-sử-dụng)
 - [Cài đặt](#-cài-đặt)
